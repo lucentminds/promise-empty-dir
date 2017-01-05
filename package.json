@@ -1,0 +1,21 @@
+{
+  "name": "promise-empty-dir",
+  "date": "01-05-2017",
+  "description": "NodeJs module that empties a directory of a list of directories.",
+  "main": "promise-empty-dir.js",
+  "author": {
+    "name": "Scott Johnson"
+  },
+  "license": "UNLICENSED",
+  "version": "0.0.1",
+  "engine": "node 4.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucentminds/promise-empty-dir.git"
+  },
+  "dependencies": {
+    "promise-resolve-path": "git+https://github.com/lucentminds/promise-resolve-path.git",
+    "fs-extra": "^1.0.0",
+    "q": ">=1.4.1"
+  }
+}
