@@ -13,10 +13,13 @@
 var Q = require( 'q' );
 var fse = require( 'fs-extra' );
 var resolvePath = require( 'promise-resolve-path' );
-var empty = module.exports = function( aPaths ){
+var empty = module.exports = function( aPaths, lCreate ){ // jshint ignore:line
     var i, l, deferred = Q.defer();
     var cPathType = typeof aPaths;
     var aPromises = [];
+
+    // Determines if the path should be created if it doesn't exist yet.
+    lCreate = lCreate || false;
 
     switch( true ) {
     case ( cPathType === 'string' ):
@@ -35,7 +38,7 @@ var empty = module.exports = function( aPaths ){
     // Determines the list of promises received from resolveOnePath.
     aPromises = [];
     
-    resolvePath( aPaths, true )
+    resolvePath( aPaths, !lCreate )
     .then(function( aResolved ){
         for( i = 0, l = aResolved.length; i < l; i++ ) {
             aPromises.push( emptyOneDir( aResolved[ i ] ) );

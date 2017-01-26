@@ -35,3 +35,14 @@ empty( './build' )
     console.log( 'Oops!' );
 
 });
+```
+
+Add boolean `true` if you want to create the directory paths if they don't exist.
+
+```js
+empty( [
+    './build',
+    './dist',
+    './temp'
+], true );
+```
