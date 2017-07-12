@@ -56,7 +56,7 @@ var empty = module.exports = function( aPaths, lCreate ){ // jshint ignore:line
             deferred.resolve( aEmptied );
         }
     })
-    .fail(function( err ){
+    .catch(function( err ){
        deferred.reject( err );
     });
     
