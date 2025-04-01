@@ -10,11 +10,11 @@
 /* jslint node: true */
 /* global JSON:false */
 
-var Q = require( 'q' );
 var fse = require( 'fs-extra' );
 var resolvePath = require( 'promise-resolve-path' );
-var empty = module.exports = function( aPaths, lCreate ){ // jshint ignore:line
-    var i, l, deferred = Q.defer();
+
+function empty( aPaths, lCreate ){ // jshint ignore:line
+    var i, l, deferred = deferred();
     var cPathType = typeof aPaths;
     var aPromises = [];
 
@@ -63,8 +63,8 @@ var empty = module.exports = function( aPaths, lCreate ){ // jshint ignore:line
    return deferred.promise;
 };// /empty();
 
-var emptyOneDir = function( cPathDir ){
-    var deferred = Q.defer();
+function emptyOneDir( cPathDir ){
+    var deferred = deferred();
 
     fse.emptyDir( cPathDir, function( err ) {
         if ( err ){
@@ -76,3 +76,20 @@ var emptyOneDir = function( cPathDir ){
 
    return deferred.promise;
 };// /emptyOneDir()
+
+function deferred(){
+    let resolve, reject;
+    const o_promise = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+    });
+    const o_deferred = {
+        promise: o_promise,
+        resolve: resolve,
+        reject: reject
+    };
+
+    return o_deferred;
+}// /deferred()
+
+module.exports = empty;
